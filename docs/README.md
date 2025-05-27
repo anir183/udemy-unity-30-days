@@ -10,7 +10,15 @@ winget install Unity.UnityHub
 * Installing Microsoft Visual Studio Community 2022
 * Setup both as requried
 
-## Project 1: Carrot Collector Game
+## Project 1: Carrot Collector Game (2D)
 * Create a new Universal 2D (Core) project
 * Order things in a folder structure
-* Download assets for the game
+* Download sprite for the game provided in course
+* Download the ["Joystick Pack" asset by Fenerax Studios](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631)
+* Create the Menu and Game scenes
+* Making the scripts for PlayerController, CollectablesController and UIManager
+* PlayerController handles joystick input, player movement, boundary checking and collision with collectibles
+* CollectiblesController handles spawning of Carrots, keeping track of score and handling win condition
+* UI manager handles quitting game, changing scenes and toggling of UI elements
+
+Windows and Android Build are [HERE](https://github.com/anir183/udemy-unity-30-days/releases/tag/CarrotCollector)
