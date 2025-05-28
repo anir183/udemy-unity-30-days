@@ -11,14 +11,21 @@ winget install Unity.UnityHub
 * Setup both as requried
 
 ## Project 1: Carrot Collector Game (2D)
-* Create a new Universal 2D (Core) project
-* Order things in a folder structure
-* Download sprite for the game provided in course
-* Download the ["Joystick Pack" asset by Fenerax Studios](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631)
-* Create the Menu and Game scenes
-* Making the scripts for PlayerController, CollectablesController and UIManager
-* PlayerController handles joystick input, player movement, boundary checking and collision with collectibles
-* CollectiblesController handles spawning of Carrots, keeping track of score and handling win condition
-* UI manager handles quitting game, changing scenes and toggling of UI elements
+* External Assets Used
+  * Sprites from Udemy Course
+  * ["Joystick Pack" asset by Fenerax Studios](https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631)
+
+* Scripts
+  * PlayerController handles joystick input, player movement, boundary checking and collision with collectibles
+  * CollectiblesController handles spawning of Carrots, keeping track of score and handling win condition
+  * UIManager handles quitting game, changing scenes and toggling of UI elements
 
 Windows and Android Build are [HERE](https://github.com/anir183/udemy-unity-30-days/releases/tag/CarrotCollector)
+
+## Project 2: Dodging Game (3D)
+* Scripts
+  * PlayerController handles touch and ext keyboard/joystick/etc input, movement of player and gradual increase of movement speed
+  * ObstaclesSpawner handles spawning of obstacles and game difficulty by gradually increasing number, density and speed of obstacles
+  * UIManager handles quitting game, changing scenes and toggling of UI elements
+
+Windows and Android Build are [HERE](https://github.com/anir183/udemy-unity-30-days/releases/tag/DodgingGame)
