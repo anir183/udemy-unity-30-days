@@ -7,6 +7,8 @@ public class ObstacleSpawner : MonoBehaviour
     [Header("Spawn References")]
     [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private GameObject[] spawnPoints;
+    [SerializeField] private GameObject groundAndr;
+    [SerializeField] private GameObject ground;
 
     [Header("Spawn Timings")]
     [SerializeField] private float timeBetweenSpawnsSec = 3f;
@@ -16,16 +18,23 @@ public class ObstacleSpawner : MonoBehaviour
     [Header("Spawn Quantity")]
     [SerializeField] private float obstaclesPerSpawn = 1;
     [SerializeField] private float obstaclesIncrTimeMod = 0.1f;
-    [SerializeField] private int maxObstaclesPerSpawn;
+    private int maxObstaclesPerSpawn;
 
     [Header("Obstacle Force")]
     [SerializeField] private Vector3 constForce = new Vector3(0, -40, -30);
     [SerializeField] private Vector3 constForceIncrPerSpawn = new Vector3(0, -2, -2);
     [SerializeField] private Vector3 maxConstForce = new Vector3(0, -70, -60);
 
+    private void Awake()
+    {
+        ground.SetActive(Application.platform != RuntimePlatform.Android);
+        groundAndr.SetActive(Application.platform == RuntimePlatform.Android);
+    }
+
     private void Start()
     {
         maxObstaclesPerSpawn = Mathf.CeilToInt(spawnPoints.Length * 0.7f);
+        // maxObstaclesPerSpawn = 2;
         StartCoroutine(spawnObstacles());
     }
 
@@ -61,6 +70,28 @@ public class ObstacleSpawner : MonoBehaviour
                 }
 
                 spawns[i] = random;
+
+                if (Application.platform == RuntimePlatform.Android)
+                {
+                    while ((spawns[Mathf.FloorToInt(spawns.Length / 2.1f)] == 1 && spawns[Mathf.FloorToInt(spawns.Length / 2.1f) + 1] == 2)
+                        || (spawns[Mathf.FloorToInt(spawns.Length / 2.1f)] == 2 && spawns[Mathf.FloorToInt(spawns.Length / 2.1f) + 1] == 1))
+                    {
+                        random = new Rnd().Next(0, spawnPoints.Length);
+                        spawns[Mathf.FloorToInt(spawns.Length / 2.1f) + 1] = random;
+
+                        for (int j = 0; j < spawns.Length; j++)
+                        {
+                            while (random == spawns[j])
+                            {
+                                random = new Rnd().Next(0, spawnPoints.Length);
+                                spawns[Mathf.FloorToInt(spawns.Length / 2.1f) + 1] = random;
+                                j = 0;
+                            }
+                        }
+                    }
+
+                    obstacle.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                }
 
                 obstacle.transform.position = spawnPoints[random].transform.position;
                 obstacle.transform.SetParent(obstacleGroup.transform);

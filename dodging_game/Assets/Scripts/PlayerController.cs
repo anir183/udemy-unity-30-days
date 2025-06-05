@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android)
         {
-            moveSpeed *=  0.75f;
-            moveSpeedCap *= 0.55f;
-            moveSpeedIncrMod *= 0.25f;
+            moveSpeed *=  0.82f;
+            moveSpeedCap *= 0.61f;
+            moveSpeedIncrMod *= 0.071f;
         }
 
         Time.timeScale = 1;
