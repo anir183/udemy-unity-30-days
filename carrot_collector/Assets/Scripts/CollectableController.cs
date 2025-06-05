@@ -1,3 +1,4 @@
+using Rnd = System.Random;
 using UnityEngine;
 
 public class CollectableController : MonoBehaviour
@@ -6,8 +7,10 @@ public class CollectableController : MonoBehaviour
     public static CollectableController instance { get; private set; }
 
     [SerializeField] private GameObject collectible;
-    [SerializeField] private int spawnQuantity;
+    [SerializeField] private Vector2 spawnQuantity = new Vector2(17, 32);
     [SerializeField] private Vector2 spawnBounds = new Vector2(30, 15);
+
+    private int spawned;
 
     private void Awake()
     {
@@ -25,7 +28,8 @@ public class CollectableController : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < spawnQuantity; i++)
+        spawned = new Rnd().Next(Mathf.FloorToInt(spawnQuantity.x), Mathf.CeilToInt(spawnQuantity.y));
+        for (int i = 0; i < spawned; i++)
         {
             GameObject newCollectible = Instantiate(collectible);
             float randomX = Random.Range(-spawnBounds.x, spawnBounds.x);
@@ -39,7 +43,7 @@ public class CollectableController : MonoBehaviour
     {
         score++;
 
-        if (score >= spawnQuantity)
+        if (score >= spawned)
         {
             UIController.instance.showWinScreen();
         }
